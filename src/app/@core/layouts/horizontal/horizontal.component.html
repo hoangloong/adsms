@@ -1,0 +1,16 @@
+<lg-header></lg-header>
+<nz-layout class="h-[calc(100vh-64px)] bg-transparent">
+  <nz-sider
+    [nzCollapsedWidth]="appConfig.enableDock ? 80 : 0"
+    [nzCollapsed]="appConfig.collapsed"
+    nzWidth="280px"
+    class="bg-transparent"
+  >
+    <lg-sidebar></lg-sidebar>
+  </nz-sider>
+
+  <nz-layout class="bg-transparent">
+    <nz-content class="border rounded-s-lg shadow-md"></nz-content>
+    <nz-footer class="bg-transparent"></nz-footer>
+  </nz-layout>
+</nz-layout>
