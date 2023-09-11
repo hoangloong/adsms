@@ -1,5 +1,11 @@
-<nz-header class="bg-white h-16">
+<nz-header class="bg-white h-16 flex justify-between items-center">
   <button nz-button nzType="text" (click)="toggleSidebar()">
-    <span nz-icon nzType="arrow-left"></span>
+    <span
+      nz-icon
+      nzType="arrow-left"
+      [nzRotate]="appConfig.collapsed ? 180 : 0"
+    ></span>
   </button>
+
+  <lg-user-menu></lg-user-menu>
 </nz-header>

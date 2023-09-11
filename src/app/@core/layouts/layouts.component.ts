@@ -3,8 +3,7 @@ import { BaseClass } from '../base/base-class';
 import { ConfigService } from '../services/app-config.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDrawerService } from 'ng-zorro-antd/drawer';
-import { NzIconModule, NzIconService } from 'ng-zorro-antd/icon';
-import { SettingOutline } from '@ant-design/icons-angular/icons';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { HorizontalComponent } from './horizontal/horizontal.component';
 
 @Component({
@@ -28,6 +27,7 @@ export class LayoutsComponent extends BaseClass implements OnInit {
   openConfigDrawer() {
     const configDrawer = this._drawer.create({
       // nzContent: ''
+      nzTitle: 'Cá nhân hoá',
     });
   }
 }
