@@ -1,11 +1,19 @@
-<nz-header class="bg-white h-16 flex justify-between items-center">
-  <button nz-button nzType="text" (click)="toggleSidebar()">
-    <span
-      nz-icon
-      nzType="arrow-left"
-      [nzRotate]="appConfig.collapsed ? 180 : 0"
-    ></span>
-  </button>
+<nz-header class="bg-white h-16 flex justify-between items-center px-0">
+  <div class="flex justify-start items-center gap-3 w-full">
+    <div class="w-[280px] h-12 px-4">
+      <div class="w-full h-12 bg-slate-200 rounded-md"></div>
+    </div>
+    <button nz-button nzType="text" nzSize="large" (click)="toggleSidebar()">
+      <span
+        nz-icon
+        [nzType]="appConfig.collapsed ? 'menu-unfold' : 'menu-fold'"
+      ></span>
+    </button>
+
+    <div class="flex-1">
+      <lg-header-search></lg-header-search>
+    </div>
+  </div>
 
   <lg-user-menu></lg-user-menu>
 </nz-header>

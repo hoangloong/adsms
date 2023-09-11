@@ -1,0 +1,209 @@
+<form
+  nz-form
+  [formGroup]="formSignUp"
+  nzLayout="horizontal"
+  class="w-[max(300px,400px)]"
+  (ngSubmit)="handleSignUp()"
+>
+  <!-- Email field -->
+  <nz-form-item class="mb-0" nzFlex>
+    <nz-form-label nzSpan="24" nzRequired>Email</nz-form-label>
+    <nz-form-control
+      nzSpan="24"
+      [nzValidateStatus]="
+        formSignUp.controls['email'].touched &&
+        formSignUp.controls['email'].invalid
+          ? 'error'
+          : 'success'
+      "
+      nzErrorTip="Vui lòng nhập địa chỉ email hợp lệ!"
+    >
+      <input
+        nz-input
+        nzSize="large"
+        formControlName="email"
+        placeholder=""
+        autocomplete="off"
+      />
+    </nz-form-control>
+  </nz-form-item>
+  <!-- Password field -->
+  <nz-form-item class="mb-0" nzFlex>
+    <nz-form-label nzSpan="24" nzRequired>Mật khẩu</nz-form-label>
+    <nz-form-control
+      nzSpan="24"
+      [nzValidateStatus]="
+        formSignUp.controls['password'].touched &&
+        formSignUp.controls['password'].hasError('required')
+          ? 'error'
+          : formSignUp.controls['password'].hasError('pattern')
+          ? 'error'
+          : 'success'
+      "
+      [nzErrorTip]="
+        formSignUp.controls['password'].hasError('required')
+          ? 'Vui lòng nhập mật khẩu!'
+          : ''
+      "
+    >
+      <input
+        type="password"
+        nz-input
+        nzSize="large"
+        formControlName="password"
+        placeholder=""
+        (focus)="formSignUp.controls['password'].markAsTouched()"
+      />
+      <ul
+        *ngIf="
+          formSignUp.controls['password'].touched &&
+          !formSignUp.controls['password'].hasError('required')
+        "
+        class="py-2 px-4 mb-0"
+      >
+        <li class="flex items-center gap-2 text-base">
+          <i
+            nz-icon
+            [nzType]="
+              regexUpperCase.test(formSignUp.controls['password'].value)
+                ? 'check-circle'
+                : 'info-circle'
+            "
+          ></i>
+          Chữ hoa
+        </li>
+        <li class="flex items-center gap-2 text-base">
+          <i
+            nz-icon
+            [nzType]="
+              regexLowerCase.test(formSignUp.controls['password'].value)
+                ? 'check-circle'
+                : 'info-circle'
+            "
+          ></i>
+          Chữ thường
+        </li>
+        <li class="flex items-center gap-2 text-base">
+          <i
+            nz-icon
+            [nzType]="
+              regexDigit.test(formSignUp.controls['password'].value)
+                ? 'check-circle'
+                : 'info-circle'
+            "
+          ></i>
+          Số
+        </li>
+        <li class="flex items-center gap-2 text-base">
+          <i
+            nz-icon
+            [nzType]="
+              regexSpecialCharacter.test(formSignUp.controls['password'].value)
+                ? 'check-circle'
+                : 'info-circle'
+            "
+          ></i>
+          Kí tự đặc biệt (@$!%*?&)
+        </li>
+        <li class="flex items-center gap-2 text-base">
+          <i
+            nz-icon
+            [nzType]="
+              formSignUp.controls['password'].hasError('minlength')
+                ? 'info-circle'
+                : 'check-circle'
+            "
+          ></i>
+          > 8 kí tự
+        </li>
+      </ul>
+    </nz-form-control>
+  </nz-form-item>
+  <!-- Confirm password field -->
+  <nz-form-item class="mb-0" nzFlex>
+    <nz-form-label nzSpan="24" nzRequired>Xác nhận mật khẩu</nz-form-label>
+    <nz-form-control
+      nzSpan="24"
+      [nzValidateStatus]="
+        formSignUp.controls['confirm_password'].touched &&
+        formSignUp.controls['confirm_password'].invalid
+          ? 'error'
+          : 'success'
+      "
+      nzErrorTip="Mật khẩu không trùng khớp!"
+    >
+      <input
+        type="password"
+        nz-input
+        nzSize="large"
+        formControlName="confirm_password"
+        placeholder=""
+        (focus)="formSignUp.controls['confirm_password'].markAsTouched()"
+      />
+    </nz-form-control>
+  </nz-form-item>
+  <!-- Full name field -->
+  <nz-form-item class="mb-0" nzFlex>
+    <nz-form-label nzSpan="24" nzRequired>Họ và Tên</nz-form-label>
+    <nz-form-control
+      nzSpan="24"
+      [nzValidateStatus]="
+        formSignUp.controls['full_name'].touched &&
+        formSignUp.controls['full_name'].invalid
+          ? 'error'
+          : 'success'
+      "
+      nzErrorTip="Vui lòng nhập Họ và Tên!"
+    >
+      <input
+        type="text"
+        nz-input
+        nzSize="large"
+        formControlName="full_name"
+        placeholder=""
+      />
+    </nz-form-control>
+  </nz-form-item>
+  <!-- Phone field -->
+  <nz-form-item class="mb-0" nzFlex>
+    <nz-form-label nzSpan="24" nzRequired>Số điện thoại</nz-form-label>
+    <nz-form-control
+      nzSpan="24"
+      [nzValidateStatus]="
+        formSignUp.controls['phone_number'].touched &&
+        formSignUp.controls['phone_number'].invalid
+          ? 'error'
+          : 'success'
+      "
+      nzErrorTip="Vui lòng nhập số điện thoại!"
+    >
+      <input
+        nz-input
+        nzSize="large"
+        formControlName="phone_number"
+        placeholder=""
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- <nz-form-item class="mb-0" nzFlex>
+    <nz-form-label nzSpan="24" nzRequired>Mật khẩu</nz-form-label>
+    <input
+      type="password"
+      nz-input
+      nzSize="large"
+      formControlName="password"
+      placeholder=""
+    />
+  </nz-form-item> -->
+
+  <button
+    type="submit"
+    nz-button
+    nzType="primary"
+    nzSize="large"
+    class="w-full text-lg font-medium mt-5"
+  >
+    Đăng ký
+  </button>
+</form>

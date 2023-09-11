@@ -1,0 +1,16 @@
+<div class="w-screen h-screen flex flex-col items-center justify-center">
+  <div class="w-[max(300px,400px)]">
+    <span class="font-semibold text-2xl">Đăng nhập</span>
+    <div class="css-typing">
+      <p>Đăng nhập để sử dụng dịch vụ</p>
+    </div>
+
+    <lg-form-sign-in></lg-form-sign-in>
+
+    <nz-divider nzText="Chưa có tài khoản?" nzOrientation="right"></nz-divider>
+
+    <button class="w-full" nz-button nzSize="large" (click)="handleClickSignUp()">
+      <span class="text-[#1DA57A]">Đăng ký</span>
+    </button>
+  </div>
+</div>

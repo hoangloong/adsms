@@ -1,0 +1,13 @@
+<nz-input-group nzCompact nzSize="large">
+  <nz-select nzSize="large" [ngModel]="'Khách hàng'" class="w-40">
+    <nz-option [nzLabel]="'Khách hàng'" [nzValue]="'Khách hàng'" nz></nz-option>
+    <nz-option [nzLabel]="'Dự án'" [nzValue]="'Dự án'"></nz-option>
+    <nz-option [nzLabel]="'Chiến dịch'" [nzValue]="'Chiến dịch'"></nz-option>
+  </nz-select>
+  <input class="pr-20" type="text" nz-input class="w-64" />
+  <button nz-button nzSize="large" nzType="primary" class="w-32">
+    <span class="flex items-center gap-2"
+      ><span nz-icon nzType="control"></span> Nâng cao</span
+    >
+  </button>
+</nz-input-group>

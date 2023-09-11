@@ -14,7 +14,15 @@ import {
   ArrowLeftOutline,
   UserOutline,
   TeamOutline,
+  ControlOutline,
+  MenuFoldOutline,
+  MenuUnfoldOutline,
+  CheckCircleOutline,
+  InfoCircleOutline,
 } from '@ant-design/icons-angular/icons';
+// import { APOLLO_OPTIONS } from 'apollo-angular';
+// import { InMemoryCache } from '@apollo/client/core';
+// import { HttpLink } from 'apollo-angular/http';
 
 const icons: IconDefinition[] = [
   SettingOutline,
@@ -23,6 +31,11 @@ const icons: IconDefinition[] = [
   ArrowLeftOutline,
   UserOutline,
   TeamOutline,
+  ControlOutline,
+  MenuFoldOutline,
+  MenuUnfoldOutline,
+  CheckCircleOutline,
+  InfoCircleOutline,
 ];
 
 export const appConfig: ApplicationConfig = {
@@ -31,5 +44,17 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideAnimations(),
     importProvidersFrom(NzIconModule.forRoot([...icons])),
+    // {
+    //   provide: APOLLO_OPTIONS,
+    //   useFactory(httpLink: HttpLink) {
+    //     return {
+    //       cache: new InMemoryCache(),
+    //       link: httpLink.create({
+    //         uri: 'https://luycqhapxuynmnjsenei.hasura.ap-southeast-1.nhost.run/v1/graphql',
+    //       }),
+    //     };
+    //   },
+    //   deps: [HttpLink],
+    // },
   ],
 };

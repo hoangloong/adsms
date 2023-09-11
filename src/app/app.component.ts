@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { AuthService } from './@core/services/auth.service';
 @Component({
   selector: 'lg-root',
   standalone: true,
@@ -7,6 +8,8 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'adsms';
+  constructor(private _auth: AuthService, private _route: ActivatedRoute) {}
+  ngOnInit() {}
 }

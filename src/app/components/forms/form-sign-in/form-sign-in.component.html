@@ -1,0 +1,66 @@
+<form
+  nz-form
+  [formGroup]="formSignIn"
+  nzLayout="horizontal"
+  class="w-[max(300px,400px)]"
+  (ngSubmit)="handleSignIn()"
+>
+  <!-- Email field -->
+  <nz-form-item class="mb-0" nzFlex>
+    <nz-form-label nzSpan="24" nzRequired>Email</nz-form-label>
+    <nz-form-control
+      nzSpan="24"
+      [nzValidateStatus]="
+        formSignIn.controls['email'].touched &&
+        formSignIn.controls['email'].invalid
+          ? 'error'
+          : 'success'
+      "
+      nzErrorTip="Vui lòng nhập địa chỉ email hợp lệ!"
+    >
+      <input
+        nz-input
+        nzSize="large"
+        formControlName="email"
+        placeholder=""
+        autocomplete="off"
+      />
+    </nz-form-control>
+  </nz-form-item>
+  <!-- Password field -->
+  <nz-form-item class="mb-0" nzFlex>
+    <nz-form-label nzSpan="24" nzRequired>Mật khẩu</nz-form-label>
+    <nz-form-control
+      nzSpan="24"
+      [nzValidateStatus]="
+        formSignIn.controls['password'].touched &&
+        formSignIn.controls['password'].invalid
+          ? 'error'
+          : 'success'
+      "
+      nzErrorTip="Vui lòng nhập mật khẩu!"
+    >
+      <input
+        type="password"
+        nz-input
+        nzSize="large"
+        formControlName="password"
+        placeholder=""
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  <div class="w-full flex justify-end py-3">
+    <button class="font-medium" nz-button nzType="link">Quên mật khẩu?</button>
+  </div>
+
+  <button
+    type="submit"
+    nz-button
+    nzType="primary"
+    nzSize="large"
+    class="w-full text-lg font-medium"
+  >
+    Đăng nhập
+  </button>
+</form>
