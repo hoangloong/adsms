@@ -23,7 +23,7 @@ export class StaffsComponent implements OnInit {
   }
 
   getStaffs() {
-    this._staffs.getStaffs().subscribe({
+    this._staffs.getStaffs(10, 0).subscribe({
       next: (res) => {
         if (res.error) {
           this._noti.error('Lỗi', (res.error as any)[0].message, {

@@ -7,19 +7,14 @@ import { nhost } from 'src/main';
 export class StaffsService {
   constructor() {}
 
-  getStaffs() {
-    const CUSTOMERS = gql`
-      {
-        users(limit: 10, offset: 10) {
-          createdDate
-          description
+  getStaffs(limit: number, offset: number) {
+    const GET_STAFFS = gql`
+      query staffs($limit: Int, $offset: Int) {
+        users(limit: $limit, offset: $offset) {
           id
-          modifiedBy
-          modifiedDate
-          name
         }
       }
     `;
-    return from(nhost.graphql.request(CUSTOMERS));
+    return from(nhost.graphql.request(GET_STAFFS, { limit, offset }));
   }
 }
