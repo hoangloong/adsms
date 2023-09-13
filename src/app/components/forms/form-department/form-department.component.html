@@ -1,0 +1,49 @@
+<form
+  nz-form
+  [formGroup]="formDepartment"
+  (ngSubmit)="handleSubmit()"
+  nzLayout="horizontal"
+>
+  <!-- Field Department / Name -->
+  <nz-form-item>
+    <nz-form-label nzFor="name" nzSpan="24" nzRequired
+      >Tên phòng ban</nz-form-label
+    >
+    <nz-form-control nzSpan="1-24">
+      <input type="text" nz-input nzSize="large" formControlName="name" />
+    </nz-form-control>
+  </nz-form-item>
+  <!-- Field Department / Description -->
+  <nz-form-item>
+    <nz-form-label nzFor="name" nzSpan="24" nzRequired>Mô tả</nz-form-label>
+    <nz-form-control nzSpan="1-24">
+      <textarea
+        type="text"
+        nz-input
+        nzSize="large"
+        formControlName="description"
+      ></textarea>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Field Department / Staff -->
+  <nz-form-item>
+    <nz-form-label nzFor="name" nzSpan="24" nzRequired>Nhân sự</nz-form-label>
+    <nz-form-control nzSpan="1-24">
+      <nz-select
+        nzMode="tags"
+        formControlName="staffs"
+        nzPlaceHolder=""
+        nzAllowClear
+        nzSize="large"
+      >
+        <nz-option
+          *ngFor="let staff of staffs"
+          [nzLabel]="staff.displayName"
+          [nzValue]="staff.id"
+        >
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+</form>

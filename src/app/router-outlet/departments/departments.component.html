@@ -1,8 +1,5 @@
 <div>
-  <lg-page-header
-    [action]="pageHeaderAction"
-    [description]="pageHeaderDescription"
-  ></lg-page-header>
+  <lg-page-header [action]="pageHeaderAction"></lg-page-header>
 
   <nz-table
     [nzLoading]="fetchingData"
@@ -11,7 +8,7 @@
     nzShowSizeChanger
     nzPaginationType="small"
     #basicTable
-    [nzData]="staffs"
+    [nzData]="departments"
     (nzPageSizeChange)="handlePageSizeChange($event)"
     (nzPageIndexChange)="handlePageIndexChange($event)"
   >
@@ -22,24 +19,23 @@
           [nzIndeterminate]="indeterminate"
           (nzCheckedChange)="onAllChecked($event)"
         ></th>
-        <th>Họ và Tên</th>
-        <th>Số điện thoại</th>
-        <th>Email</th>
-        <th>Address</th>
+        <th>Tên phòng ban</th>
+        <th>Mô tả</th>
+        <th>Nhân viên</th>
+        <th>Phòng ban con</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data">
         <td
-          [nzDisabled]="data.defaultRole === 'admin'"
           [nzChecked]="setOfCheckedId.has(data.id)"
           (nzCheckedChange)="onItemChecked(data.id, $event)"
         ></td>
-        <td>{{ data.displayName }}</td>
-        <td>{{ data.phoneNumber }}</td>
-        <td>{{ data.email }}</td>
-        <td>{{ "-" }}</td>
+        <td>{{ data.name }}</td>
+        <td>{{ data.description }}</td>
+        <td>{{ data.staffs.length }}</td>
+        <td>{{ data.child.length }}</td>
         <td>
           <a>Action</a>
           <a>Delete</a>
@@ -56,47 +52,27 @@
         [disabled]="!setOfCheckedId.size"
         (click)="handleDeleteClick()"
       >
-        Xoá {{ setOfCheckedId.size ? setOfCheckedId.size : "" }} nhân viên
+        Xoá {{ setOfCheckedId.size ? setOfCheckedId.size : "" }} phòng ban
       </button>
       <button
         *nzSpaceItem
         nz-button
         nzType="primary"
-        (click)="handeAddStaffClick()"
+        (click)="handleAddDepartmentClick()"
       >
-        Thêm nhân viên
+        Thêm phòng ban
       </button>
     </nz-space>
   </ng-template>
 
-  <ng-template #pageHeaderDescription>
-    <nz-descriptions nzSize="small" [nzColumn]="3">
-      <nz-descriptions-item nzTitle="Created" [nzSpan]="1"
-        >Lili Qu</nz-descriptions-item
-      >
-      <nz-descriptions-item nzTitle="Association" [nzSpan]="1"
-        ><a>421421</a></nz-descriptions-item
-      >
-      <nz-descriptions-item nzTitle="Creation Time" [nzSpan]="1"
-        >2017-01-10</nz-descriptions-item
-      >
-      <nz-descriptions-item nzTitle="Effective Time" [nzSpan]="1"
-        >2017-10-10</nz-descriptions-item
-      >
-      <nz-descriptions-item nzTitle="Remarks" [nzSpan]="2">
-        Gonghu Road, Xihu District, Hangzhou, Zhejiang, China
-      </nz-descriptions-item>
-    </nz-descriptions>
-  </ng-template>
-
-  <ng-template #footerStaffDrawer>
+  <ng-template #footerDepartmentDrawer>
     <div style="float: right">
       <nz-space>
         <button
           *nzSpaceItem
           nz-button
           nzSize="large"
-          (click)="staffDrawer.close()"
+          (click)="deparmentDrawer.close()"
         >
           Cancel
         </button>
@@ -105,7 +81,7 @@
           nz-button
           nzSize="large"
           nzType="primary"
-          (click)="handleAddStaff()"
+          (click)="handleAddDepartment()"
         >
           Submit
         </button>

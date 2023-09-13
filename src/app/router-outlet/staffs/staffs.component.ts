@@ -19,9 +19,7 @@ import { BaseClass } from 'src/app/@core/base/base-class';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzDrawerRef, NzDrawerService } from 'ng-zorro-antd/drawer';
 import { FormStaffComponent } from 'src/app/components/forms/form-staff/form-staff.component';
-import { AuthService } from 'src/app/@core/services/auth.service';
-import { createFragmentRegistry } from '@apollo/client/cache';
-import { gql } from 'apollo-angular';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'lg-staffs',
@@ -36,7 +34,7 @@ import { gql } from 'apollo-angular';
   ],
   templateUrl: './staffs.component.html',
   styleUrls: ['./staffs.component.scss'],
-  providers: [NzNotificationService, NzDrawerService],
+  providers: [NzNotificationService, NzDrawerService, NzModalService],
 })
 export class StaffsComponent extends BaseClass implements OnInit {
   @ViewChild('footerStaffDrawer')
@@ -52,7 +50,8 @@ export class StaffsComponent extends BaseClass implements OnInit {
     private _noti: NzNotificationService,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _drawer: NzDrawerService
+    private _drawer: NzDrawerService,
+    private _modal: NzModalService
   ) {
     super();
   }
@@ -127,7 +126,9 @@ export class StaffsComponent extends BaseClass implements OnInit {
   }
 
   onAllChecked(checked: boolean): void {
-    this.staffs.forEach(({ id }) => this.updateCheckedSet(id, checked));
+    this.staffs
+      .filter(({ defaultRole }) => defaultRole !== 'admin')
+      .forEach(({ id }) => this.updateCheckedSet(id, checked));
     this.refreshCheckedStatus();
   }
 
@@ -164,20 +165,63 @@ export class StaffsComponent extends BaseClass implements OnInit {
     if (contentComponent?.formStaff.valid) {
       const { email, displayName, phoneNumber } =
         contentComponent.formStaff.value;
-      this._staffs.addStaff().subscribe({
-        next: (res) => {
-          console.log(res);
-        },
-        error: (res) => {
-          console.log(res);
-        },
-      });
+
+      const staff = {
+        displayName: displayName!,
+        email: email!,
+        phoneNumber: phoneNumber!,
+        emailVerified: true,
+        phoneNumberVerified: true,
+        locale: 'vi',
+        passwordHash:
+          '$2a$10$/ajUhiYj/EnfU2lGhQ/gCOGsan4wWMsur0EDPizZEpo2r8iogRRYe',
+      };
+      this._staffs
+        .addStaff({
+          ...staff,
+        })
+        .subscribe({
+          next: (res) => {
+            if (res.data) {
+              this.staffDrawer.close();
+              this.getStaffs();
+            } else {
+              this._noti.error('Lỗi', 'Có lỗi xảy ra, vui lòng liên hệ IT', {
+                nzPlacement: 'topRight',
+              });
+            }
+          },
+          error: (res) => {
+            console.log(res);
+          },
+        });
     } else {
       contentComponent?.formStaff.markAllAsTouched();
     }
   }
 
-  closeDrawer() {
-    this.staffDrawer.close();
+  handleDeleteClick() {
+    const modal = this._modal.confirm({
+      nzTitle: `Xóa ${this.setOfCheckedId.size} nhân viên đã chọn?`,
+      nzContent: 'Không thể hoàn tác sau khi xác nhận xóa!',
+      nzCancelText: 'Hủy',
+      nzOkDanger: true,
+      nzOkText: 'Xóa',
+      nzOnOk: () => {
+        const ids = Array.from(this.setOfCheckedId);
+        this._staffs
+          .deleteStaffs([...ids])
+          .pipe(this.unsubsribeOnDestroy)
+          .subscribe({
+            next: (res) => {
+              if (res.data) {
+                this.setOfCheckedId.clear();
+                this.getStaffs();
+              }
+            },
+            error: (err) => {},
+          });
+      },
+    });
   }
 }

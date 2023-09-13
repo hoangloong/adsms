@@ -1,5 +1,5 @@
 <button
-  class="h-[48px] flex gap-2 items-center py-1 px-3"
+  class="h-[48px] flex gap-2 items-center py-1 px-3 font-medium"
   nz-button
   nzType="text"
   nz-dropdown
@@ -11,12 +11,27 @@
     [nzSize]="'large'"
     [nzIcon]="'user'"
   ></nz-avatar>
-  Tạ Hoàng Long (longth.dev@gmail.com)
+  {{ profile?.displayName }}
   <span nz-icon nzType="down"></span>
 </button>
 <nz-dropdown-menu #menu="nzDropdownMenu">
-  <ul nz-menu nzSelectable>
-    <li nz-menu-item>1st menu item</li>
+  <ul class="min-w-[300px]" nz-menu nzSelectable>
+    <li class="flex gap-3 px-3 py-2 items-start justify-start">
+      <nz-avatar
+        [nzShape]="'square'"
+        [nzSize]="64"
+        [nzIcon]="'user'"
+      ></nz-avatar>
+      <div>
+        <div class="text-base font-medium">{{ profile?.displayName }}</div>
+        <div>{{ profile?.email }}</div>
+        <div>{{ profile?.phoneNumber }}</div>
+      </div>
+    </li>
+    <hr />
+    <li nz-menu-item>
+      <a routerLink="/profile">Cập nhật thông tin cá nhân</a>
+    </li>
     <li nz-menu-item>2nd menu item</li>
     <li nz-menu-item>3rd menu item</li>
     <hr />

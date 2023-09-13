@@ -20,6 +20,7 @@ import { NgIf, NgTemplateOutlet } from '@angular/common';
   styleUrls: ['./page-header.component.scss'],
 })
 export class PageHeaderComponent {
+  @Input() hiddenBreadcrumb: boolean = false;
   @Input() action: TemplateRef<NzSpaceComponent> | undefined;
   @Input() description: TemplateRef<NzDescriptionsComponent> | undefined;
 }

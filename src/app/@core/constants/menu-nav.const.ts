@@ -2,7 +2,7 @@ export const MENU_NAVIGATION = [
   {
     level: 1,
     title: 'Quản lý hệ thống',
-    icon: 'mail',
+    icon: 'control',
     open: true,
 
     disabled: false,
@@ -11,8 +11,6 @@ export const MENU_NAVIGATION = [
         level: 2,
         title: 'Nhân sự',
         icon: 'bars',
-        open: false,
-
         disabled: false,
         routerLink: '/staffs',
         // children: [
@@ -32,16 +30,15 @@ export const MENU_NAVIGATION = [
       },
       {
         level: 2,
-        title: 'Group 2',
+        title: 'Phòng ban',
         icon: 'bars',
-
         disabled: false,
+        routerLink: '/departments',
       },
       {
         level: 2,
         title: 'Group 3',
         icon: 'bars',
-
         disabled: false,
       },
     ],

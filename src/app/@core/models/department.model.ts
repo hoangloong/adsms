@@ -1,13 +1,20 @@
 import { User } from '@nhost/nhost-js';
 
-export interface Department {
-  createdBy: User;
-  createdUtcDate: string;
-  departmentId: string;
+export interface IDepartment {
+  id: string;
   description: string;
-  isDelete: boolean;
-  modifiedUtcDate: string;
   name: string;
-  users: User[];
-  childDepartments?: Department[];
+  staffs: User[];
+  child: IDepartment[];
+  createdUtcDate: string;
+  modifiedUtcDate: string;
+  modifiedBy: string;
+}
+
+export interface IAddDepartment {
+  description: string;
+  name: string;
+  staffs: User[];
+  child: IDepartment[];
+  // modifiedBy: string;
 }

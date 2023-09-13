@@ -23,6 +23,29 @@ export const routes: Routes = [
             (c) => c.StaffsComponent
           ),
       },
+      {
+        data: {
+          docTitle: 'string',
+          pageTitle: 'string',
+          pageSubtitle: 'string',
+          breadcrumb: [],
+        },
+        path: 'departments',
+        loadComponent: () =>
+          import('./router-outlet/departments/departments.component').then(
+            (c) => c.DepartmentsComponent
+          ),
+      },
+      {
+        data: {
+          docTitle: 'Thông tin cá nhân',
+        },
+        path: 'profile',
+        loadComponent: () =>
+          import('./router-outlet/profile/profile.component').then(
+            (c) => c.ProfileComponent
+          ),
+      },
     ],
   },
   {

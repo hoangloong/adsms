@@ -5,7 +5,7 @@
   nzTitle="Title"
   nzSubtitle="This is a subtitle"
 >
-  <nz-breadcrumb nz-page-header-breadcrumb>
+  <nz-breadcrumb *ngIf="!hiddenBreadcrumb" nz-page-header-breadcrumb>
     <nz-breadcrumb-item>First-level Menu</nz-breadcrumb-item>
     <nz-breadcrumb-item>
       <a>Second-level Menu</a>

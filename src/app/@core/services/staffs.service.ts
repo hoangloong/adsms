@@ -4,6 +4,7 @@ import { gql } from 'apollo-angular';
 import { nhost } from 'src/main';
 import { User } from '@nhost/nhost-js';
 import { IGraphQLRes } from '../models/api-response.model';
+import { IAddStaff } from '../models/staffs.model';
 
 @Injectable({ providedIn: 'root' })
 export class StaffsService {
@@ -25,23 +26,32 @@ export class StaffsService {
     );
   }
 
-  addStaff() {
+  addStaff(staff: IAddStaff) {
     const ADD_STAFF = gql`
-      mutation MyMutation {
-        insertUser(
-          object: {
-            displayName: "Tạ Hoàng Long"
-            email: "qml0204@gmail.com"
-            emailVerified: true
-            phoneNumber: "0344464222"
-            phoneNumberVerified: true
-            locale: "vi"
-          }
-        ) {
+      mutation insertUser($staff: users_insert_input!) {
+        insertUser(object: $staff) {
           id
         }
       }
     `;
-    return from(nhost.graphql.request<IGraphQLRes<User[]>>(ADD_STAFF));
+    return from(nhost.graphql.request(ADD_STAFF, { staff }));
+  }
+
+  deleteStaffs(staffIds: string[]) {
+    const DELETE_STAFFS = gql`
+      mutation deleteStaffs($ids: [uuid!]) {
+        deleteUsers(where: { id: { _in: $ids } }) {
+          returning {
+            displayName
+          }
+        }
+      }
+    `;
+
+    return from(
+      nhost.graphql.request(DELETE_STAFFS, {
+        ids: staffIds,
+      })
+    );
   }
 }
