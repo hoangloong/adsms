@@ -1,0 +1,74 @@
+<form
+  nz-form
+  [formGroup]="formStaff"
+  (ngSubmit)="handleSubmit()"
+  nzLayout="horizontal"
+>
+  <!-- Full name field -->
+  <nz-form-item class="mb-0" nzFlex>
+    <nz-form-label nzSpan="24" nzRequired>Họ và Tên</nz-form-label>
+    <nz-form-control
+      nzSpan="24"
+      [nzValidateStatus]="
+        formStaff.controls['displayName'].touched &&
+        formStaff.controls['displayName'].invalid
+          ? 'error'
+          : 'success'
+      "
+      nzErrorTip="Vui lòng nhập Họ và Tên!"
+    >
+      <input
+        type="text"
+        nz-input
+        nzSize="large"
+        formControlName="displayName"
+        placeholder=""
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Phone field -->
+  <nz-form-item class="mb-0" nzFlex>
+    <nz-form-label nzSpan="24" nzRequired>Số điện thoại</nz-form-label>
+    <nz-form-control
+      nzSpan="24"
+      [nzValidateStatus]="
+        formStaff.controls['phoneNumber'].touched &&
+        formStaff.controls['phoneNumber'].invalid
+          ? 'error'
+          : 'success'
+      "
+      nzErrorTip="Vui lòng nhập số điện thoại!"
+    >
+      <input
+        nz-input
+        nzSize="large"
+        formControlName="phoneNumber"
+        placeholder=""
+      />
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- Email field -->
+  <nz-form-item class="mb-0" nzFlex>
+    <nz-form-label nzSpan="24" nzRequired>Email</nz-form-label>
+    <nz-form-control
+      nzSpan="24"
+      [nzValidateStatus]="
+        formStaff.controls['email'].touched &&
+        formStaff.controls['email'].invalid
+          ? 'error'
+          : 'success'
+      "
+      nzErrorTip="Vui lòng nhập địa chỉ email hợp lệ!"
+    >
+      <input
+        nz-input
+        nzSize="large"
+        formControlName="email"
+        placeholder=""
+        autocomplete="off"
+      />
+    </nz-form-control>
+  </nz-form-item>
+</form>

@@ -1,8 +1,8 @@
 <lg-header></lg-header>
 <nz-layout class="h-[calc(100vh-64px)] bg-transparent">
   <nz-sider
-    [nzCollapsedWidth]="appConfig.enableDock ? 80 : 0"
-    [nzCollapsed]="appConfig.collapsed"
+    [nzCollapsedWidth]="appConfig?.enableDock ? 80 : 0"
+    [nzCollapsed]="appConfig?.collapsed"
     nzWidth="280px"
     class="bg-transparent"
   >
@@ -10,7 +10,7 @@
   </nz-sider>
 
   <nz-layout class="bg-transparent">
-    <nz-content class="border rounded-s-lg shadow-md">
+    <nz-content class="border rounded-s-lg shadow-md px-6 py-4">
       <router-outlet></router-outlet>
     </nz-content>
     <nz-footer class="bg-transparent"></nz-footer>

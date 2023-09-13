@@ -20,6 +20,7 @@ import {
   CheckCircleOutline,
   InfoCircleOutline,
 } from '@ant-design/icons-angular/icons';
+import { NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
 // import { APOLLO_OPTIONS } from 'apollo-angular';
 // import { InMemoryCache } from '@apollo/client/core';
 // import { HttpLink } from 'apollo-angular/http';
@@ -44,6 +45,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideAnimations(),
     importProvidersFrom(NzIconModule.forRoot([...icons])),
+    { provide: NZ_I18N, useValue: vi_VN },
     // {
     //   provide: APOLLO_OPTIONS,
     //   useFactory(httpLink: HttpLink) {

@@ -15,8 +15,4 @@ export class ConfigService {
   get appConfig() {
     return this.$appConfig.value;
   }
-
-  set appConfig(config: IAppConfig) {
-    this.$appConfig.next(config);
-  }
 }

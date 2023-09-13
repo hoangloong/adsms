@@ -1,4 +1,4 @@
-<nz-sider [nzCollapsed]="appConfig.collapsed" nzWidth="280px">
+<nz-sider [nzCollapsed]="appConfig?.collapsed" nzWidth="280px">
   <ul nz-menu nzMode="inline" class="border-none bg-transparent">
     <ng-container
       *ngTemplateOutlet="menuTpl; context: { $implicit: menus }"

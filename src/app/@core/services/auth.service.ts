@@ -8,7 +8,9 @@ import { nhost } from 'src/main';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor() {}
+  constructor() {
+
+  }
 
   getUser() {
     return nhost.auth.getUser();

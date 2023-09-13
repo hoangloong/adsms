@@ -21,13 +21,14 @@ import { HeaderSearchComponent } from '../header-search/header-search.component'
 })
 export class HeaderComponent extends BaseClass implements OnInit {
   ngOnInit(): void {
-    this.config.$appConfig.subscribe((value) => (this.appConfig = value));
+    this.config?.$appConfig.subscribe((value) => (this.appConfig = value));
   }
 
   toggleSidebar() {
-    this.config.$appConfig.next({
-      ...this.appConfig,
-      collapsed: !this.appConfig.collapsed,
-    });
+    this.appConfig &&
+      this.config?.$appConfig.next({
+        ...this.appConfig,
+        collapsed: !this.appConfig.collapsed,
+      });
   }
 }

@@ -26,6 +26,6 @@ export class SidebarComponent extends BaseClass {
   menus = MENU_NAVIGATION;
   router = window.location.pathname;
   ngOnInit(): void {
-    this.config.$appConfig.subscribe((value) => (this.appConfig = value));
+    this.config?.$appConfig.subscribe((value) => (this.appConfig = value));
   }
 }

@@ -11,6 +11,12 @@ export const routes: Routes = [
     component: LayoutsComponent,
     children: [
       {
+        data: {
+          docTitle: 'string',
+          pageTitle: 'string',
+          pageSubtitle: 'string',
+          breadcrumb: [],
+        },
         path: 'staffs',
         loadComponent: () =>
           import('./router-outlet/staffs/staffs.component').then(

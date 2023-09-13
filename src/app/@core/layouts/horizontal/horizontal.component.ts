@@ -21,6 +21,6 @@ import { RouterOutlet } from '@angular/router';
 })
 export class HorizontalComponent extends BaseClass implements OnInit {
   ngOnInit(): void {
-    this.config.$appConfig.subscribe((value) => (this.appConfig = value));
+    this.config?.$appConfig.subscribe((value) => (this.appConfig = value));
   }
 }

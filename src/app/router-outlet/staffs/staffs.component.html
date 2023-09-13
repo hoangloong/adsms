@@ -1,1 +1,104 @@
-<p>staffs works!</p>
+<div>
+  <lg-page-header
+    [action]="pageHeaderAction"
+    [description]="pageHeaderDescription"
+  ></lg-page-header>
+
+  <nz-table
+    [nzLoading]="fetchingData"
+    nzBordered
+    nzSize="small"
+    nzShowSizeChanger
+    nzPaginationType="small"
+    #basicTable
+    [nzData]="staffs"
+    (nzPageSizeChange)="handlePageSizeChange($event)"
+    (nzPageIndexChange)="handlePageIndexChange($event)"
+  >
+    <thead>
+      <tr>
+        <th
+          [nzChecked]="checked"
+          [nzIndeterminate]="indeterminate"
+          (nzCheckedChange)="onAllChecked($event)"
+        ></th>
+        <th>Họ và Tên</th>
+        <th>Số điện thoại</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td
+          [nzChecked]="setOfCheckedId.has(data.id)"
+          (nzCheckedChange)="onItemChecked(data.id, $event)"
+        ></td>
+        <td>{{ data.displayName }}</td>
+        <td>{{ data.phoneNumber }}</td>
+        <td>{{ data.email }}</td>
+        <td>{{ "-" }}</td>
+        <td>
+          <a>Action</a>
+          <a>Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <ng-template #pageHeaderAction>
+    <nz-space>
+      <button *nzSpaceItem nz-button [disabled]="!setOfCheckedId.size">
+        Xoá {{ setOfCheckedId.size ? setOfCheckedId.size : "" }} nhân viên
+      </button>
+      <button
+        *nzSpaceItem
+        nz-button
+        nzType="primary"
+        (click)="handeAddStaffClick()"
+      >
+        Thêm nhân viên
+      </button>
+    </nz-space>
+  </ng-template>
+
+  <ng-template #pageHeaderDescription>
+    <nz-descriptions nzSize="small" [nzColumn]="3">
+      <nz-descriptions-item nzTitle="Created" [nzSpan]="1"
+        >Lili Qu</nz-descriptions-item
+      >
+      <nz-descriptions-item nzTitle="Association" [nzSpan]="1"
+        ><a>421421</a></nz-descriptions-item
+      >
+      <nz-descriptions-item nzTitle="Creation Time" [nzSpan]="1"
+        >2017-01-10</nz-descriptions-item
+      >
+      <nz-descriptions-item nzTitle="Effective Time" [nzSpan]="1"
+        >2017-10-10</nz-descriptions-item
+      >
+      <nz-descriptions-item nzTitle="Remarks" [nzSpan]="2">
+        Gonghu Road, Xihu District, Hangzhou, Zhejiang, China
+      </nz-descriptions-item>
+    </nz-descriptions>
+  </ng-template>
+
+  <ng-template #footerStaffDrawer>
+    <div style="float: right">
+      <nz-space>
+        <button *nzSpaceItem nz-button nzSize="large" (click)="closeDrawer()">
+          Cancel
+        </button>
+        <button
+          *nzSpaceItem
+          nz-button
+          nzSize="large"
+          nzType="primary"
+          (click)="handleAddStaff()"
+        >
+          Submit
+        </button>
+      </nz-space>
+    </div>
+  </ng-template>
+</div>
